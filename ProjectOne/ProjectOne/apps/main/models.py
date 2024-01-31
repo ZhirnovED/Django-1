@@ -20,6 +20,9 @@ class Review(models.Model):
     rating_value = models.IntegerField('Рейтинг')
     pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
 
+    def __str__(self):
+        return self.author_name
+
     class Meta:
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'

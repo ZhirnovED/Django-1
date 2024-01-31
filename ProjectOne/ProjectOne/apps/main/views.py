@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
 from django. urls import reverse
+
+from rest_framework import viewsets
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+
+from .serializers import ReviewSerializer
+
 from .forms import ReviewFilter
 
 from .models import Article, Review
@@ -53,3 +59,12 @@ def leave_comment(request, article_id):
     article.review_set.create(author_name = request.POST['name'], review_text = request.POST['text'], rating_value = request.POST['rating'] )
 
     return HttpResponseRedirect(reverse('main:detail', args=(article.id,)) )
+
+
+# =============== API
+
+class ReviewApiView(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    # parser_classes = (MultiPartParser, FormParser, JSONParser)
+    http_method_names = ['get', 'post']
