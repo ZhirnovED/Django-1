@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Main Page {% endblock %}
+
+{% block content %}
+
+<h1>Main Page</h1>
+
+    {% if articles %}
+
+        {% for article in articles %}
+
+            <a href="{% url 'main:detail' article.id %}">{{article.article_title}}</a>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>Данных нет!</p>
+
+    {% endif %}
+
+{% endblock %}

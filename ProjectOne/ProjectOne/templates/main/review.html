@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} Отзыв {% endblock %}
+
+{% block content %}
+
+<h2>Напишите отзыв</h2>
+
+<form action="{% url 'main:leave_comment' content.id %}" method="POST">
+
+    {% csrf_token%}
+
+    <input type="text" required placeholder="Имя" name="name">
+
+    <br><br>
+
+    <textarea name="text" required placeholder="Текст отзыва" cols="30" rows="10">
+
+    </textarea>
+
+    <br><br>
+
+    <label> Оценка:</label>
+    <div style="display:flex">
+        <input type="radio" name="rating" value="1">1
+        <input type="radio" name="rating" value="2">2
+        <input type="radio" name="rating" value="3">3
+        <input type="radio" name="rating" value="4">4
+        <input type="radio" name="rating" value="5">5
+    </div>
+
+    <br><br>
+
+    <button type="submit">Оставить отзыв</button>
+
+</form>
+
+{% endblock %}

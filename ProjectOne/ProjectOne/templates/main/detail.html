@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %} {{content.article_title}} {% endblock %}
+
+{% block content %}
+
+<h2>{{content.article_title}}</h2>
+
+<p>{{content.article_text}}</p>
+
+<p>Дата публикации: <i>{{content.pub_date}}</i></p>
+
+<hr>
+<h2>Фильтр</h2>
+
+<form action="" method="GET">
+    {{ form.as_p}}
+    <input type="submit" value="Поиск">
+</form>
+
+<hr>
+    {% if reviews %}
+
+        {% for review in reviews %}
+
+            <h3>Автор: {{review.author_name}}</h3>
+
+            <p>Дата публикации: <em>{{review.pub_date}}</em></p>
+
+            <p>{{review.review_text}}</p>
+
+            <strong>Оценка: {{review.rating_value}} </strong>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>Комментариев нет!</p>
+
+    {% endif%}
+
+
+<hr>
+
+<br>
+<br>
+<br>
+
+<a style="font-size: 20px; border: 1px solid black; padding: 10px;" href="{% url 'main:review' content.id %}">Оставить отзыв</a>
+
+<br>
+<br>
+<br>
+
+
+{% endblock %}
